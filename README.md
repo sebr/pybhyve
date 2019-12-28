@@ -7,7 +7,7 @@ REST and Websocket APIs provided by [Orbit BHyve](https://orbitbhyve.com/).
 is not publicly documented and this library has been reverse engineered. As such,
 there are no guarantees that it will continue to work.
 
-Many thanks to @bachya for laying most of the groundwork with bachya/aioambient
+Many thanks to [@bachya](https://github.com/bachya/) for laying most of the groundwork with [bachya/aioambient](https://github.com/bachya/aioambient/)
 
 # Installation
 
