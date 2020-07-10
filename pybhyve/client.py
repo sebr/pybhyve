@@ -105,7 +105,7 @@ class Client:
     async def _refresh_device_history(self, device_id, force_update=False):
         now = time.time()
         if force_update:
-            _LOGGER.info(f"Forcing refresh of device history {device_id}")
+            _LOGGER.info("Forcing refresh of device history %s", device_id)
         elif now - self._last_poll_device_histories < API_POLL_PERIOD:
             return
 
