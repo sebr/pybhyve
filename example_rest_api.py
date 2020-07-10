@@ -17,10 +17,11 @@ async def main() -> None:
     logging.basicConfig(level=logging.INFO)
     async with ClientSession() as session:
         try:
-            client = Client(USERNAME, PASSWORD, session)
-            await client.api.login()
+            client = Client(USERNAME, PASSWORD, asyncio.get_event_loop(), session, None)
+            await client.login()
 
-            devices = await client.api.devices
+            devices = await client.devices
+
             _LOGGER.info("Devices: %s", devices)
 
         except BHyveError as err:

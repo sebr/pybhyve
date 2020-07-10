@@ -14,36 +14,21 @@ USERNAME = "username"
 PASSWORD = "password"
 
 
-def print_data(data):
-    """Print data as it is received."""
-    _LOGGER.info("Data received: %s", data)
-
-def print_hello():
-    """Print a simple "hello" message."""
-    _LOGGER.info("Client has connected to the websocket")
-
+async def async_websocket_handler(data):
+    _LOGGER.info("Websocket data %s", data)
 
 async def main() -> None:
     """Run the websocket example."""
 
     async with ClientSession() as session:
-        client = Client(USERNAME, PASSWORD, session)
-        await client.api.login()
-
-        try:
-            ws = client.api.websocket
-            ws.on_connect(print_hello)
-            ws.on_message(print_data)
-            await ws.connect()
-        except WebsocketError as err:
-            _LOGGER.error("There was a websocket error: %s", err)
-            return
+        client = Client(USERNAME, PASSWORD, asyncio.get_event_loop(), session, async_websocket_handler)
+        await client.login()
 
         for _ in range(30):
-            _LOGGER.info("Waiting...")
+            _LOGGER.info("Waiting for messages...")
             await asyncio.sleep(5)
 
-        await client.api.websocket.disconnect()
+        await client.stop()
 
 
 loop = asyncio.get_event_loop()
