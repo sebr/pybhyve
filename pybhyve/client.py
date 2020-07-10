@@ -61,7 +61,7 @@ class Client:
             "Host": re.sub("https?://", "", API_HOST),
             "Content-Type": "application/json; charset=utf-8;",
             "Referer": API_HOST,
-            "Orbit-Session-Token": self._token,
+            "Orbit-Session-Token": self._token or "",
         }
         headers["User-Agent"] = (
             "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) "

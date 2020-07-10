@@ -20,11 +20,11 @@ async def test_api_error(aresponses, event_loop, devices_json):
         aresponses.Response(text="", status=500),
     )
 
-    async with aiohttp.ClientSession(loop=event_loop) as websession:
-        client = Client(TEST_USERNAME, TEST_PASSWORD, websession)
+    async with aiohttp.ClientSession(loop=event_loop) as session:
+        client = Client(TEST_USERNAME, TEST_PASSWORD, None, session, None)
 
         with pytest.raises(RequestError):
-            await client.api.devices
+            await client.devices
 
 
 @pytest.mark.asyncio
@@ -36,8 +36,8 @@ async def test_get_devices(aresponses, event_loop, devices_json):
         aresponses.Response(text=json.dumps(devices_json), status=200),
     )
 
-    async with aiohttp.ClientSession(loop=event_loop) as websession:
-        client = Client(TEST_USERNAME, TEST_PASSWORD, websession)
+    async with aiohttp.ClientSession(loop=event_loop) as session:
+        client = Client(TEST_USERNAME, TEST_PASSWORD, None, session, None)
 
-        devices = await client.api.devices
+        devices = await client.devices
         assert len(devices) == 2
