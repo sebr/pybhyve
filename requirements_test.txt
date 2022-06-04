@@ -1,4 +1,4 @@
-aiohttp==3.6.2
+aiohttp==3.7.4
 aresponses==1.1.2
 pylint==2.4.4
 pytest-aiohttp==0.3.0
